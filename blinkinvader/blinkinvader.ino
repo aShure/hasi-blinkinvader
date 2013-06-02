@@ -4,6 +4,9 @@
  201305171614 Alex Shure
  */
 
+#define DEBUG 1 // debug mode with verbose output over serial at 115200 bps
+#define pot1 A2
+#define pot2 A3
 unsigned int brightness = 0;
 const int gain = 255; // 0..255, whereas 255 equals a gain of 1 - thus this is an attenuation.
 const int rPin = 5; // arms up \o/
@@ -37,23 +40,31 @@ else {
 }
 
 void setup() {
-//  Serial.begin(115200);   // initialize the serial communication
+  #ifdef DEBUG
+  Serial.begin(115200);   // initialize the serial communication
+  #endif
   pinMode(rPin, OUTPUT);   // set pins as outputs
   pinMode(gPin, OUTPUT); 
+  pinMode(pot1, INPUT); 
+  pinMode(pot2, INPUT);   
   digitalWrite(rPin,LOW);
   digitalWrite(gPin,LOW);
   }
 
 void loop() {
-  unsigned int fadeSpeed=analogRead(0);
-  unsigned long interval=analogRead(1);
-//  Serial.println("DEB");
-//  Serial.println(fadeSpeed,DEC);
-//  Serial.println(interval,DEC);
+  unsigned int fadeSpeed=analogRead(pot1);
+  unsigned long interval=analogRead(pot2);
+  #ifdef DEBUG
+  Serial.println("DEB");
+  Serial.println(fadeSpeed,DEC);
+  Serial.println(interval,DEC);
+  #endif
   unsigned long cycle=interval*10;
   fadeSpeed=fadeSpeed*5;
-//  Serial.println(fadeSpeed,DEC);
-//  Serial.println(cycle,DEC);
+  #ifdef DEBUG
+  Serial.println(fadeSpeed,DEC);
+  Serial.println(cycle,DEC);
+  #endif
 //  interval=1000;
 //  fadeSpeed=20;
   invade(255,fadeSpeed);
