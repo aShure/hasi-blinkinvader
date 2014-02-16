@@ -1,5 +1,5 @@
 /*
- This code is released under the the Open Source ISC License and the WTFPL License.
+ This code is released under the Open Source ISC License and the WTFPL License.
  Feel free to do anything you want to, but change the name of the project.
  201305171614 Alex Shure
  */
